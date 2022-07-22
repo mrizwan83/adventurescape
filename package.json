@@ -1,0 +1,26 @@
+{
+  "name": "adventurescape",
+  "version": "1.0.0",
+  "description": "Background:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrizwan83/adventurescape.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrizwan83/adventurescape/issues"
+  },
+    "browserslist": [
+      "defaults"
+    ],
+    
+    "homepage": "https://github.com/mrizwan83/adventurescape#readme"
+}
