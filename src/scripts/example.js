@@ -6,8 +6,6 @@ canvas.height = 576
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-
-
 ///sprite ideas for fight/battle
 
 //// https://luizmelo.itch.io/wizard-pack  (wizard)
