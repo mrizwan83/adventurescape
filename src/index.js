@@ -1,16 +1,29 @@
-const canvas = document.querySelector('canvas');
+const canvas = document.getElementById('scene1');
 const c = canvas.getContext('2d');
-
-
 canvas.width = 1024;
 canvas.height = 576;
+
+//lets try to make battlezones
+
+///
+// const canvas2 = document.getElementById('scene2');
+// const c2 = canvas2.getContext('2d')
+// canvas2.width = 1024;
+// canvas2.height = 576;
+
+////
+
+const battleMap = [];
+for (let i = 0; i < battleTiles.length; i += 70 ) {
+  battleMap.push(battleTiles.slice(i, (i +70)));
+}
+
+
 const collisionsMap = [];
 for (let i = 0; i < collisions.length; i += 70) {
     collisionsMap.push(collisions.slice(i, (i + 70)));
 }
-
-
-
+const battleZones = [];
 const boundaries = [];
 const offset = {
     x: -1290,
@@ -28,6 +41,20 @@ collisionsMap.forEach((row, i) => {
         }
     }))
     })
+});
+
+
+battleMap.forEach((row, i) => {
+  row.forEach((ele, j) => {
+    if (ele === 1738 )
+      battleZones.push(
+        new Zone({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y
+          }
+        }))
+  })
 })
 
 
@@ -109,12 +136,15 @@ const keys = {
     },
     d: {
         pressed: false
+    },
+    c: {
+        pressed: false
     }
 }
 
 
 
-const movables = [background, ...boundaries, foreground];
+const movables = [background, ...boundaries, foreground, ...battleZones];
 
 function rectangularCollision({rectangle1, rectangle2}) {
     return (rectangle1.position.x + rectangle1.width -8 >= rectangle2.position.x && 
@@ -130,12 +160,32 @@ function animate() {
     boundaries.forEach(boundary => {
         boundary.draw();
     })
+    battleZones.forEach(zone => {
+        zone.draw();
+    })
     // knight.draw();
     hero.draw();
     foreground.draw();
     
     let moving = true;
     hero.moving = false;
+    //lets try battlezone activation
+    if (keys.c.pressed && lastKey === 'c') {
+      for (let i = 0; i < battleZones.length; i++) {
+        const zone = battleZones[i];
+        if (rectangularCollision({
+          rectangle1: hero,
+          rectangle2: {...zone, position : {
+            x: zone.position.x,
+            y: zone.position.y
+          }}
+        })) {
+          console.log("this is temporary placement for my code that will initite fighting scene")
+          break;
+        }
+    }
+  }
+
     if (keys.w.pressed && lastKey === 'w') {
         hero.moving = true;
         hero.image = hero.sprites.up;
@@ -251,6 +301,10 @@ window.addEventListener('keydown', (e) => {
             keys.d.pressed = true;
             lastKey = 'd';
             break
+        case 'c':
+            keys.c.pressed = true;
+            lastKey = 'c';
+            break
     }
 });
 
@@ -268,6 +322,9 @@ window.addEventListener('keyup', (e) => {
         case 'd':
             keys.d.pressed = false;
             break
+        case 'c':
+        keys.c.pressed = false;
+        break
     }
 });
 
@@ -283,7 +340,7 @@ window.addEventListener('keyup', (e) => {
 
 // const gravity = 0.7;
 
-// class Sprite {
+// class Sprite1 {
 //   constructor({position, velocity}) {
 //     this.position = position;
 //     this.velocity = velocity;
@@ -292,8 +349,8 @@ window.addEventListener('keyup', (e) => {
 //   }
 
 //   draw() {
-//     c.fillStyle = 'blue';
-//     c.fillRect(this.position.x, this.position.y, 50, this.height);
+//     c2.fillStyle = 'blue';
+//     c2.fillRect(this.position.x, this.position.y, 50, this.height);
 //   }
 
 
@@ -308,11 +365,9 @@ window.addEventListener('keyup', (e) => {
 //       this.velocity.y += gravity;
 //     }
 //   }
-
-
 // }
 
-// const player = new Sprite({
+// const player = new Sprite1({
 //   position: {
 //   x: 100,
 //   y: 100
@@ -323,7 +378,7 @@ window.addEventListener('keyup', (e) => {
 //   }
 // });
 
-// const npc = new Sprite({
+// const npc = new Sprite1({
 //   position: {
 //     x: 850,
 //     y: 100
@@ -337,7 +392,7 @@ window.addEventListener('keyup', (e) => {
 
 // console.log(player);
 
-// const keys = {
+// const keys2 = {
 //   a: {
 //     pressed: false
 //   },
@@ -355,35 +410,33 @@ window.addEventListener('keyup', (e) => {
 //   }
 // }
 
-// let lastKey;
+// let lastKey2;
 
 // console.log(npc);
 
 
-// function animate() {
-//   window.requestAnimationFrame(animate);
-//   c.fillStyle = 'black';
-//   c.fillRect(0, 0, canvas.width, canvas.height);
+// function animate2() {
+//   window.requestAnimationFrame(animate2);
+//   c2.fillStyle = 'black';
+//   c2.fillRect(0, 0, canvas2.width, canvas2.height);
 //   player.update();
 //   npc.update();
 
 //   player.velocity.x = 0;
 //   npc.velocity.x = 0;
-//   if (keys.a.pressed && lastKey === 'a') {
+//   if (keys2.a.pressed && lastKey === 'a') {
 //     player.velocity.x = -1;
-//   } else if (keys.d.pressed && lastKey === 'd') {
+//   } else if (keys2.d.pressed && lastKey === 'd') {
 //     player.velocity.x = 1;
 //   }
 //   ///npc movement
-//   if (keys.ArrowLeft.pressed && npc.lastKey === 'ArrowLeft') {
+//   if (keys2.ArrowLeft.pressed && npc.lastKey === 'ArrowLeft') {
 //     npc.velocity.x = -1;
-//   } else if (keys.ArrowRight.pressed && npc.lastKey === 'ArrowRight') {
+//   } else if (keys2.ArrowRight.pressed && npc.lastKey === 'ArrowRight') {
 //     npc.velocity.x = 1;
 //   }
 // }
-
-
-// animate();
+// animate2();
 
 
 // // const npc = new Sprite({
@@ -423,21 +476,21 @@ window.addEventListener('keyup', (e) => {
 // //   }
 // // }
 
-// // render();
+// // // render();
 
 // window.addEventListener('keydown', (event) => {
 //   console.log(event.key);
 //   switch (event.key) {
 //     case ('d'):
 //       // player.velocity.x = 1;
-//       keys.d.pressed = true;
-//       lastKey = 'd'
+//       keys2.d.pressed = true;
+//       lastKey2 = 'd'
 //       // player.lastKey = 'd';
 //       break
 //     case ('a'):
 //       // player.velocity.x = -1;
-//       keys.a.pressed = true;
-//       lastKey = 'a'
+//       keys2.a.pressed = true;
+//       lastKey2 = 'a'
 //       // player.lastKey = 'd';
 //       break
 //     case ('w'):
@@ -446,14 +499,14 @@ window.addEventListener('keyup', (e) => {
 
 //     case ('ArrowRight'):
 //       // player.velocity.x = 1;
-//       keys.ArrowRight.pressed = true;
-//       npc.lastKey = 'ArrowRight'
+//       keys2.ArrowRight.pressed = true;
+//       npc.lastKey2 = 'ArrowRight'
 //       // player.lastKey = 'd';
 //       break
 //     case ('ArrowLeft'):
 //       // player.velocity.x = -1;
-//       keys.ArrowLeft.pressed = true;
-//       npc.lastKey = 'ArrowLeft'
+//       keys2.ArrowLeft.pressed = true;
+//       npc.lastKey2 = 'ArrowLeft'
 //       // player.lastKey = 'd';
 //       break
 //     case ('ArrowUp'):
@@ -467,12 +520,12 @@ window.addEventListener('keyup', (e) => {
 //   switch (event.key) {
 //     case ('d'):
 //       // player.velocity.x = 0;
-//       keys.d.pressed = false;
+//       keys2.d.pressed = false;
 //       // player.lastKey = 'd';
 //       break
 //     case ('a'):
 //       // player.velocity.x = 0;
-//       keys.a.pressed = false;
+//       keys2.a.pressed = false;
 //       // player.lastKey = 'd';
 //       break
     
@@ -480,12 +533,12 @@ window.addEventListener('keyup', (e) => {
 //       //npc
 //     case ('ArrowRight'):
 //       // player.velocity.x = 0;
-//       keys.ArrowRight.pressed = false;
+//       keys2.ArrowRight.pressed = false;
 //       // player.lastKey = 'd';
 //       break
 //     case ('ArrowLeft'):
 //       // player.velocity.x = 0;
-//       keys.ArrowLeft.pressed = false;
+//       keys2.ArrowLeft.pressed = false;
 //       // player.lastKey = 'd';
 //       break
 //   }

@@ -47,7 +47,24 @@ class Boundary {
     }
 
     draw() {
+        // c.fillStyle = 'green';
         c.fillStyle = 'rgba(255, 0, 0, 0.0)'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+}
+
+class Zone {
+    static width = 36;
+    static height = 36;
+    constructor({ position }) {
+        this.position = position;
+        this.width = 36;
+        this.height = 36;
+    }
+
+    draw() {
+        // c.fillStyle = 'green';
+        c.fillStyle = 'rgba(0, 255, 0, 0.0)'
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
