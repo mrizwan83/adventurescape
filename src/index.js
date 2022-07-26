@@ -1,30 +1,31 @@
-const canvas = document.getElementById('scene1');
-const c = canvas.getContext('2d');
+import { fightTiles } from "./data/battle";
+import { collisions } from "./data/collisions";
+import Sprite from "./scripts/sprite";
+import Boundary from "./scripts/boundary";
+import Zone from "./scripts/zone";
+import Game from "./scripts/game";
+
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
-//lets try to make battlezones
 
-///
-// const canvas2 = document.getElementById('scene2');
-// const c2 = canvas2.getContext('2d')
-// canvas2.width = 1024;
-// canvas2.height = 576;
-
-////
-
+// all the tiles where we can activate a fight/battle
 const battleMap = [];
-for (let i = 0; i < battleTiles.length; i += 70 ) {
-  battleMap.push(battleTiles.slice(i, (i +70)));
+for (let i = 0; i < fightTiles.length; i += 70 ) {
+  battleMap.push(fightTiles.slice(i, (i +70)));
 }
 
-
+// all the tiles where we shouldnt be able to move past
 const collisionsMap = [];
 for (let i = 0; i < collisions.length; i += 70) {
     collisionsMap.push(collisions.slice(i, (i + 70)));
 }
 const battleZones = [];
 const boundaries = [];
+
+// offset for worldmap image and collsions and battlezones 
 const offset = {
     x: -1290,
     y: -600
@@ -65,9 +66,6 @@ worldmap.src = 'wireframes\\map.png';
 const foregroundImage = new Image();
 foregroundImage.src = 'wireframes\\foregroundObjects.png';
 
-// const knightImage = new Image ();
-// knightImage.src = 'wireframes\\down.png'
-
 const heroDownImage = new Image () ;
 heroDownImage.src = 'wireframes\\herodown.png';
 
@@ -97,16 +95,6 @@ const hero = new Sprite({
     }
 })
 console.log(hero)
-// const knight = new Sprite({
-//     position: {
-//         x: canvas.width / 2 - 576 / 9 / 2,
-//         y: canvas.height / 2 - 64 / 2,
-//     },
-//     image: knightImage,
-//     frames: {
-//         max: 8
-//     }
-// })
 
 const background = new Sprite({
     position: {
@@ -153,6 +141,10 @@ function rectangularCollision({rectangle1, rectangle2}) {
         rectangle1.position.y + rectangle1.height + 4 >= rectangle2.position.y)
 }
 
+const fight = {
+  started: false
+}
+
 
 function animate() {
     window.requestAnimationFrame(animate);
@@ -180,7 +172,8 @@ function animate() {
             y: zone.position.y
           }}
         })) {
-          console.log("this is temporary placement for my code that will initite fighting scene")
+          fight.started = true;
+          console.log("this is where my code will go")
           break;
         }
     }
@@ -327,219 +320,3 @@ window.addEventListener('keyup', (e) => {
         break
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-// const gravity = 0.7;
-
-// class Sprite1 {
-//   constructor({position, velocity}) {
-//     this.position = position;
-//     this.velocity = velocity;
-//     this.height = 150;
-//     this.lastKey
-//   }
-
-//   draw() {
-//     c2.fillStyle = 'blue';
-//     c2.fillRect(this.position.x, this.position.y, 50, this.height);
-//   }
-
-
-//   update() {
-//     this.draw();
-//     this.position.x += this.velocity.x;
-//     this.position.y += this.velocity.y;
-
-//     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-//       this.velocity.y = 0;
-//     } else {
-//       this.velocity.y += gravity;
-//     }
-//   }
-// }
-
-// const player = new Sprite1({
-//   position: {
-//   x: 100,
-//   y: 100
-//   },
-//   velocity: {
-//     x: 0,
-//     y: 10
-//   }
-// });
-
-// const npc = new Sprite1({
-//   position: {
-//     x: 850,
-//     y: 100
-//   },
-//   velocity: {
-//     x: 0,
-//     y: 10
-//   }
-// });
-
-
-// console.log(player);
-
-// const keys2 = {
-//   a: {
-//     pressed: false
-//   },
-//   d: {
-//     pressed: false
-//   },
-//   w: {
-//     pressed: false
-//   },
-//   ArrowRight: {
-//     pressed: false
-//   },
-//   ArrowLeft: {
-//     pressed: false
-//   }
-// }
-
-// let lastKey2;
-
-// console.log(npc);
-
-
-// function animate2() {
-//   window.requestAnimationFrame(animate2);
-//   c2.fillStyle = 'black';
-//   c2.fillRect(0, 0, canvas2.width, canvas2.height);
-//   player.update();
-//   npc.update();
-
-//   player.velocity.x = 0;
-//   npc.velocity.x = 0;
-//   if (keys2.a.pressed && lastKey === 'a') {
-//     player.velocity.x = -1;
-//   } else if (keys2.d.pressed && lastKey === 'd') {
-//     player.velocity.x = 1;
-//   }
-//   ///npc movement
-//   if (keys2.ArrowLeft.pressed && npc.lastKey === 'ArrowLeft') {
-//     npc.velocity.x = -1;
-//   } else if (keys2.ArrowRight.pressed && npc.lastKey === 'ArrowRight') {
-//     npc.velocity.x = 1;
-//   }
-// }
-// animate2();
-
-
-// // const npc = new Sprite({
-// //   position: {
-// //     x: 400,
-// //     y: 100
-// //   },
-// //   velocity: {
-// //     x: 0,
-// //     y: 0
-// //   }
-// // });
-// // player.draw();
-// // console.log(player);
-
-
-// // function render() {
-// //   window.requestAnimationFrame(render);
-// //   c.fillStyle = 'black';
-// //   c.fillRect(0, 0, canvas.width, canvas.height)
-// //   player.update();
-// //   npc.update();
-
-// //   player.velocity.x = 0;
-// //   npc.velocity.x = 0;
-
-// //   if (keys.a.pressed && player.lastKey === 'a') {
-// //     player.velocity.x = -5;
-// //   } else if (keys.d.pressed && player.lastKey === 'd') {
-// //     player.velocity.x = 1;
-// //   }
-
-// //   if (keys.ArrowLeft.pressed && npc.lastKey === 'ArrowLeft') {
-// //     player.velocity.x = -1;
-// //   } else if (keys.ArrowRight.pressed && npc.lastKey === 'ArrowRight') {
-// //     player.velocity.x = 1;
-// //   }
-// // }
-
-// // // render();
-
-// window.addEventListener('keydown', (event) => {
-//   console.log(event.key);
-//   switch (event.key) {
-//     case ('d'):
-//       // player.velocity.x = 1;
-//       keys2.d.pressed = true;
-//       lastKey2 = 'd'
-//       // player.lastKey = 'd';
-//       break
-//     case ('a'):
-//       // player.velocity.x = -1;
-//       keys2.a.pressed = true;
-//       lastKey2 = 'a'
-//       // player.lastKey = 'd';
-//       break
-//     case ('w'):
-//       player.velocity.y = -10;
-//       break
-
-//     case ('ArrowRight'):
-//       // player.velocity.x = 1;
-//       keys2.ArrowRight.pressed = true;
-//       npc.lastKey2 = 'ArrowRight'
-//       // player.lastKey = 'd';
-//       break
-//     case ('ArrowLeft'):
-//       // player.velocity.x = -1;
-//       keys2.ArrowLeft.pressed = true;
-//       npc.lastKey2 = 'ArrowLeft'
-//       // player.lastKey = 'd';
-//       break
-//     case ('ArrowUp'):
-//       npc.velocity.y = -10;
-//       break
-//   }
-// })
-
-// window.addEventListener('keyup', (event) => {
-//   console.log(event.key);
-//   switch (event.key) {
-//     case ('d'):
-//       // player.velocity.x = 0;
-//       keys2.d.pressed = false;
-//       // player.lastKey = 'd';
-//       break
-//     case ('a'):
-//       // player.velocity.x = 0;
-//       keys2.a.pressed = false;
-//       // player.lastKey = 'd';
-//       break
-    
-
-//       //npc
-//     case ('ArrowRight'):
-//       // player.velocity.x = 0;
-//       keys2.ArrowRight.pressed = false;
-//       // player.lastKey = 'd';
-//       break
-//     case ('ArrowLeft'):
-//       // player.velocity.x = 0;
-//       keys2.ArrowLeft.pressed = false;
-//       // player.lastKey = 'd';
-//       break
-//   }
-// })

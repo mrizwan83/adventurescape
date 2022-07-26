@@ -1,10 +1,10 @@
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
+// const canvas = document.querySelector('canvas')
+// const c = canvas.getContext('2d')
 
-canvas.width = 1024
-canvas.height = 576
+// canvas.width = 1024
+// canvas.height = 576
 
-c.fillRect(0, 0, canvas.width, canvas.height)
+// c.fillRect(0, 0, canvas.width, canvas.height)
 
 ///sprite ideas for fight/battle
 
