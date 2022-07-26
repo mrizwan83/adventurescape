@@ -145,7 +145,6 @@ const fight = {
   started: false
 }
 
-
 function animate() {
     window.requestAnimationFrame(animate);
     background.draw();
@@ -158,11 +157,15 @@ function animate() {
     // knight.draw();
     hero.draw();
     foreground.draw();
+
+    
     
     let moving = true;
     hero.moving = false;
+
     //lets try battlezone activation
-    if (keys.c.pressed && lastKey === 'c') {
+   
+        if (keys.c.pressed && lastKey === 'c' && !fight.started) {
       for (let i = 0; i < battleZones.length; i++) {
         const zone = battleZones[i];
         if (rectangularCollision({
@@ -172,14 +175,15 @@ function animate() {
             y: zone.position.y
           }}
         })) {
-          fight.started = true;
-          console.log("this is where my code will go")
+          console.log("activate fight")
+          fight.started = true
           break;
         }
     }
   }
 
-    if (keys.w.pressed && lastKey === 'w') {
+
+    if (keys.w.pressed && lastKey === 'w' && !fight.started) {
         hero.moving = true;
         hero.image = hero.sprites.up;
 
@@ -202,7 +206,7 @@ function animate() {
             movable.position.y += 3
         })
     }
-    else if (keys.s.pressed && lastKey === 's') {
+    else if (keys.s.pressed && lastKey === 's' && !fight.started) {
         hero.moving = true;
         hero.image = hero.sprites.down;
 
@@ -225,7 +229,7 @@ function animate() {
             movable.position.y -= 3
         })
     }
-    else if (keys.a.pressed && lastKey === 'a') {
+    else if (keys.a.pressed && lastKey === 'a' && !fight.started) {
         hero.moving = true;
         hero.image = hero.sprites.left;
 
