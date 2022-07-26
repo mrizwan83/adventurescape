@@ -6,7 +6,7 @@ import Zone from "./scripts/zone";
 import Game from "./scripts/game";
 
 const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
+// const ctx = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -165,7 +165,7 @@ function animate() {
 
     //lets try battlezone activation
    
-        if (keys.c.pressed && lastKey === 'c' && !fight.started) {
+        if (keys.c.pressed && lastKey === 'c') {
       for (let i = 0; i < battleZones.length; i++) {
         const zone = battleZones[i];
         if (rectangularCollision({
@@ -252,7 +252,7 @@ function animate() {
             movable.position.x += 3
         })
     }
-    else if (keys.d.pressed && lastKey === 'd') {
+    else if (keys.d.pressed && lastKey === 'd' && !fight.started) {
         hero.moving = true;
         hero.image = hero.sprites.right;
 
