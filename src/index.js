@@ -27,7 +27,7 @@ const boundaries = [];
 
 // offset for worldmap image and collsions and battlezones 
 const offset = {
-    x: -1290,
+    x: -1270,
     y: -600
 }
 
@@ -61,10 +61,10 @@ battleMap.forEach((row, i) => {
 
 
 const worldmap = new Image();
-worldmap.src = 'wireframes\\map.png';
+worldmap.src = 'wireframes/mapredo.png';
 
 const foregroundImage = new Image();
-foregroundImage.src = 'wireframes\\foregroundObjects.png';
+foregroundImage.src = 'wireframes/foreg.png';
 
 const heroDownImage = new Image () ;
 heroDownImage.src = 'wireframes\\herodown.png';
