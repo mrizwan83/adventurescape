@@ -5,10 +5,21 @@ import Boundary from "./scripts/boundary";
 import Zone from "./scripts/zone";
 import Game from "./scripts/game";
 
+
+
+
+
 const canvas = document.querySelector('canvas');
-// const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
+
+
+
 canvas.width = 1024;
 canvas.height = 576;
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    
 
 
 // all the tiles where we can activate a fight/battle
@@ -146,7 +157,8 @@ const fight = {
 }
 
 function animate() {
-    window.requestAnimationFrame(animate);
+    const animationID = window.requestAnimationFrame(animate);
+    console.log(animationID)
     background.draw();
     boundaries.forEach(boundary => {
         boundary.draw();
@@ -162,10 +174,11 @@ function animate() {
     
     let moving = true;
     hero.moving = false;
-
+    console.log(animationID);
     //lets try battlezone activation
-   
-        if (keys.c.pressed && lastKey === 'c') {
+    if (fight.started) return
+    else {
+     if (keys.c.pressed && lastKey === 'c') {
       for (let i = 0; i < battleZones.length; i++) {
         const zone = battleZones[i];
         if (rectangularCollision({
@@ -175,13 +188,36 @@ function animate() {
             y: zone.position.y
           }}
         })) {
-          console.log("activate fight")
-          fight.started = true
+          console.log("activate fight");
+
+          //deactivate animation loop
+          window.cancelAnimationFrame(animationID);
+          fight.started = true;
+          gsap.to('#canvasdiv', {
+            opacity: 1,
+            repeat: 4,
+            yoyo: true,
+            duration: 0.5,
+            onComplete() {
+                gsap.to('#canvasdiv', {
+                    opacity: 1,
+                    duration: 0.5,
+                    onComplete() {
+                        renderFight();
+                        gsap.to('#canvasdiv', {
+                            opacity: 0,
+                            duration: 0.4
+                        })
+                    }
+                })
+                //start fight animation loop
+            }
+        });
           break;
         }
     }
   }
-
+    }
 
     if (keys.w.pressed && lastKey === 'w' && !fight.started) {
         hero.moving = true;
@@ -277,7 +313,72 @@ function animate() {
     }
 }
 
-animate();
+// animate();
+
+const fightBackgroundImage = new Image ();
+fightBackgroundImage.src = 'wireframes\\woods.png'
+
+const hero1Image = new Image ();
+hero1Image.src = 'wireframes\\andagain.png'
+
+const warriorImage = new Image ();
+warriorImage.src = 'wireframes\\warriortry1.png'
+
+const fightBackground = new Sprite ({
+    position: {
+        x: 0,
+        y: 0
+    },
+    image: fightBackgroundImage
+});
+
+const hero1 = new Sprite ({
+    position: {
+        x: 280,
+        y: 325
+    },
+    image: hero1Image,
+    frames: {
+        max: 8,
+    },
+    moving: true
+});
+
+const warrior = new Sprite ({
+    position: {
+        x: 480,
+        y: 260
+    },
+    image: warriorImage,
+    frames: {
+        max: 10,
+    },
+    moving: true
+})
+
+
+function renderFight() {
+    window.requestAnimationFrame(renderFight);
+    fightBackground.draw();
+    hero1.draw();
+    warrior.draw();
+
+}
+///testing
+renderFight();
+
+document.querySelectorAll('button').forEach((button) => {
+    button.addEventListener('click', () => {
+        hero1.attack({
+            attack: {
+                name: 'slash',
+                damage: 25
+            },
+            recepient: warrior
+        })
+    })
+})
+
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {
@@ -323,4 +424,6 @@ window.addEventListener('keyup', (e) => {
         keys.c.pressed = false;
         break
     }
+});
+
 });

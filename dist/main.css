@@ -4,3 +4,130 @@
 h1 {
   color: green;
 }
+
+#overlap {
+  display: inline-block;
+  position: relative;
+}
+
+div {
+  display: inline-block;
+  position: relative;
+}
+
+#canvasdiv {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#attacksection {
+  background-color: green;
+  position: absolute;
+  height: 150px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 5px black solid;
+  display: flex;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0;
+  font-family: "Press Start 2P", cursive;
+}
+
+#attacks {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#description {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 5px black solid;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 50px;
+  font-family: "Press Start 2P", cursive;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+#healthsection {
+  background-color: rgb(61, 96, 8);
+  width: 250px;
+  position: absolute;
+  top: 25px;
+  left: 75px;
+  border: 5px black solid;
+  padding: 15px;
+}
+
+#healthbar {
+  display: block;
+  position: relative;
+}
+
+#healthbarred {
+  display: block;
+  height: 5px;
+  background-color: red;
+  margin-top: 10px;
+}
+
+#healthbargreen {
+  height: 5px;
+  background-color: cyan;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#healthsectionE {
+  background-color: rgb(61, 96, 8);
+  width: 250px;
+  position: absolute;
+  top: 25px;
+  right: 75px;
+  border: 5px black solid;
+  padding: 15px;
+}
+
+#healthbarE {
+  display: block;
+  position: relative;
+}
+
+#healthbarredE {
+  display: block;
+  height: 5px;
+  background-color: red;
+  margin-top: 10px;
+}
+
+#healthbargreenE {
+  height: 5px;
+  background-color: cyan;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
