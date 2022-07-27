@@ -21,6 +21,7 @@ div {
   left: 0;
   opacity: 0;
   pointer-events: none;
+  z-index: 10;
 }
 
 #attacksection {
@@ -43,7 +44,7 @@ h2 {
 #attacks {
   width: 60%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 #description {
@@ -128,4 +129,19 @@ button:hover {
   right: 0;
 }
 
+#dialogue {
+  font-family: 'Press Start 2P', cursive;
+  display: block;
+  background-color: green;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  cursor: pointer;
+}
 
+// #ui {
+
+// }

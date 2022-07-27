@@ -14,9 +14,12 @@ export default class Sprite {
     this.moving = moving;
     this.sprites = sprites;
     this.ctx = ctx;
+    this.opacity = 1;
   }
 
   draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
     ctx.drawImage(
       this.image,
       this.frames.val * this.width,
@@ -27,7 +30,7 @@ export default class Sprite {
       this.position.y,
       this.image.width / this.frames.max,
       this.image.height);
-
+      ctx.restore();
 
     if (!this.moving) return;
 
@@ -38,12 +41,5 @@ export default class Sprite {
       if (this.frames.val < this.frames.max - 1) this.frames.val++
       else this.frames.val = 0
     }
-  }
-
-  attack({attack, recipent}) {
-    const timeline = gsap.timeline()
-    timeline.to(this.position, {
-      x: this.position.x -20
-    })
   }
 }

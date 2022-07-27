@@ -3,6 +3,9 @@ import { collisions } from "./data/collisions";
 import Sprite from "./scripts/sprite";
 import Boundary from "./scripts/boundary";
 import Zone from "./scripts/zone";
+import { attacks } from "./data/attacks";
+import Fighter from "./scripts/fighter";
+import { audio } from "./data/audio";
 import Game from "./scripts/game";
 
 
@@ -105,7 +108,7 @@ const hero = new Sprite({
         right: heroRightImage
     }
 })
-console.log(hero)
+
 
 const background = new Sprite({
     position: {
@@ -158,7 +161,7 @@ const fight = {
 
 function animate() {
     const animationID = window.requestAnimationFrame(animate);
-    console.log(animationID)
+
     background.draw();
     boundaries.forEach(boundary => {
         boundary.draw();
@@ -170,11 +173,20 @@ function animate() {
     hero.draw();
     foreground.draw();
 
+    gsap.to('#attacksection', {
+        opacity: 0
+    })
+    gsap.to('#healthsection', {
+        opacity: 0
+    })
+    gsap.to('#healthsectionE', {
+        opacity: 0
+    })
+
     
     
     let moving = true;
     hero.moving = false;
-    console.log(animationID);
     //lets try battlezone activation
     if (fight.started) return
     else {
@@ -188,11 +200,19 @@ function animate() {
             y: zone.position.y
           }}
         })) {
-          console.log("activate fight");
 
           //deactivate animation loop
           window.cancelAnimationFrame(animationID);
           fight.started = true;
+            gsap.to('#attacksection', {
+                opacity: 1
+            })
+            gsap.to('#healthsection', {
+                opacity: 1
+            })
+            gsap.to('#healthsectionE', {
+                opacity: 1
+            })
           gsap.to('#canvasdiv', {
             opacity: 1,
             repeat: 4,
@@ -232,7 +252,6 @@ function animate() {
                         y: boundary.position.y + 3
                     }}
                 })) {
-                console.log("colliding")
                 moving = false;
                 break
             }
@@ -255,7 +274,6 @@ function animate() {
                         y: boundary.position.y - 3
                     }}
                 })) {
-                console.log("colliding")
                 moving = false;
                 break
             }
@@ -278,7 +296,6 @@ function animate() {
                         y: boundary.position.y
                     }}
                 })) {
-                console.log("colliding")
                 moving = false;
                 break
             }
@@ -301,7 +318,6 @@ function animate() {
                         y: boundary.position.y 
                     }}
                 })) {
-                console.log("colliding")
                 moving = false;
                 break
             }
@@ -314,70 +330,156 @@ function animate() {
 }
 
 // animate();
+    const fightBackgroundImage = new Image();
+    fightBackgroundImage.src = 'wireframes\\woods.png'
 
-const fightBackgroundImage = new Image ();
-fightBackgroundImage.src = 'wireframes\\woods.png'
+    const hero1Image = new Image();
+    hero1Image.src = 'wireframes\\andagain.png'
 
-const hero1Image = new Image ();
-hero1Image.src = 'wireframes\\andagain.png'
+    const warriorImage = new Image();
+    warriorImage.src = 'wireframes\\warriortry1.png'
 
-const warriorImage = new Image ();
-warriorImage.src = 'wireframes\\warriortry1.png'
+    const fightBackground = new Sprite({
+        position: {
+            x: 0,
+            y: 0
+        },
+        image: fightBackgroundImage
+    });
 
-const fightBackground = new Sprite ({
-    position: {
-        x: 0,
-        y: 0
-    },
-    image: fightBackgroundImage
-});
+    const hero1 = new Fighter({
+        position: {
+            x: 280,
+            y: 325
+        },
+        image: hero1Image,
+        frames: {
+            max: 8,
+        },
+        moving: true,
+        name: 'You'
+    });
 
-const hero1 = new Sprite ({
-    position: {
-        x: 280,
-        y: 325
-    },
-    image: hero1Image,
-    frames: {
-        max: 8,
-    },
-    moving: true
-});
+    const warrior = new Fighter({
+        position: {
+            x: 480,
+            y: 260
+        },
+        image: warriorImage,
+        frames: {
+            max: 10,
+        },
+        moving: true,
+        isTarget: true,
+        name: 'Green Warrior'
+    })
 
-const warrior = new Sprite ({
-    position: {
-        x: 480,
-        y: 260
-    },
-    image: warriorImage,
-    frames: {
-        max: 10,
-    },
-    moving: true
-})
+    let sceneover = false;
+
+    function renderFight() {
+        let fightAnimationId = window.requestAnimationFrame(renderFight);
+        fightBackground.draw();
 
 
-function renderFight() {
-    window.requestAnimationFrame(renderFight);
-    fightBackground.draw();
-    hero1.draw();
-    warrior.draw();
+        hero1.draw();
+        warrior.draw();
 
-}
-///testing
-renderFight();
+        if (sceneover) {
+            window.cancelAnimationFrame(fightAnimationId);
+            animate();
+        }
 
-document.querySelectorAll('button').forEach((button) => {
-    button.addEventListener('click', () => {
-        hero1.attack({
-            attack: {
-                name: 'slash',
-                damage: 25
-            },
-            recepient: warrior
+    }
+    // ///testing
+    // renderFight();
+    animate();
+
+    // document.querySelector('#ui').getElementsByClassName.display = none;
+    // if (sceneover) {
+    //     animate();
+    // }
+   
+
+
+    const queue = [attacks.BodySlam, attacks.Poison];
+
+
+    document.querySelectorAll('button').forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const chosenAttack = attacks[e.currentTarget.innerHTML];
+            hero1.attack({
+                attack: chosenAttack,
+                receiver: warrior
+            })
+      
+            setTimeout(()=> {
+                warrior.attack({
+                    attack: queue[Math.floor(Math.random()*2)],
+                    receiver: hero1
+                })
+            }, 1500);
+ 
+
+            if (hero1.health <= 0) {
+                document.getElementById("dialogue").innerHTML = `${hero1.name} lost!`;
+                setTimeout(()=> {gsap.to(hero1.position, {
+                    y: hero1.position.y + 20
+                })}, 1500)
+                setTimeout(()=> { gsap.to(hero1, {
+                    opacity: 0
+                })}, 1500)
+        
+            }
+
+            if (warrior.health <= 0) {
+                document.getElementById("dialogue").innerHTML = `${warrior.name} lost!`;
+                setTimeout(() => {
+                    gsap.to(warrior.position, {
+                        y: warrior.position.y + 20
+                    })
+                }, 1500)
+                setTimeout(() => {
+                    gsap.to(warrior, {
+                        opacity: 0
+                    })
+                }, 1500)
+         
+                setTimeout(()=> {gsap.to('#canvasdiv', {
+                    opacity: 1,
+                    onComplete: ()=> {
+                        sceneover = true
+                        gsap.to('#canvasdiv', {
+                            opacity: 0
+                        })
+                        fight.started = false
+                        gsap.to('#attacksection', {
+                            opacity: 0
+                        })
+                        gsap.to('#healthsection', {
+                            opacity: 0
+                        })
+                        gsap.to('#healthsectionE', {
+                            opacity: 0
+                        })
+                        // window.cancelAnimationFrame(fightAnimationId)
+                    }
+                })}, 2500)
+            }
         })
     })
-})
+
+  
+
+    // if (hero1.health <= 0) {
+    //     lose();
+    
+    // }
+
+    // if (warrior.health <= 0) {
+    //     lose();
+     
+    // }
+
 
 
 let lastKey = '';
