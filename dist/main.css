@@ -73,12 +73,8 @@
 #dialogue {
   font-family: "Press Start 2P", cursive;
   display: none;
-  background-color: green;
+  background-color: darkgreen;
   position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   padding: 15px;
 }
 
@@ -197,12 +193,12 @@ p {
 
 #github {
   position: relative;
-  left: 40px;
+  left: 100px;
 }
 
 #linkedin {
   position: relative;
-  left: 150px;
+  left: 220px;
 }
 
 #playsound {
