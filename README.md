@@ -47,6 +47,7 @@ This project will be implemented with the following technologies:
 -{Webpack to bundle and transpile the source JavaScript code}
 -{Vanilla DOM to handle user input events}
 -{Gsock library to handle the fight scene}
+-{Press Start 2p font}
 
 Implementation Timeline:
 

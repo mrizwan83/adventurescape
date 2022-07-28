@@ -203,7 +203,7 @@ function animate() {
         })) {
           //deactivate animation loop
           window.cancelAnimationFrame(animationID);
-          fight.started = true;
+        //   fight.started = true;
             gsap.to('#attacksection', {
                 opacity: 1
             })
@@ -234,6 +234,7 @@ function animate() {
                 //start fight animation loop
             }
         });
+            fight.started = true;
           break;
         }
     }
