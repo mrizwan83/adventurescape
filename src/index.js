@@ -161,7 +161,7 @@ const fight = {
 
 function animate() {
     const animationID = window.requestAnimationFrame(animate);
-
+    document.querySelector('#ui').style.display = 'none';
     background.draw();
     boundaries.forEach(boundary => {
         boundary.draw();
@@ -173,15 +173,15 @@ function animate() {
     hero.draw();
     foreground.draw();
 
-    gsap.to('#attacksection', {
-        opacity: 0
-    })
-    gsap.to('#healthsection', {
-        opacity: 0
-    })
-    gsap.to('#healthsectionE', {
-        opacity: 0
-    })
+    // gsap.to('#attacksection', {
+    //     opacity: 0
+    // })
+    // gsap.to('#healthsection', {
+    //     opacity: 0
+    // })
+    // gsap.to('#healthsectionE', {
+    //     opacity: 0
+    // })
 
     
     
@@ -224,6 +224,7 @@ function animate() {
                     duration: 0.5,
                     onComplete() {
                         renderFight();
+                        document.querySelector('#ui').style.display = 'block';
                         gsap.to('#canvasdiv', {
                             opacity: 0,
                             duration: 0.4
@@ -379,11 +380,12 @@ function animate() {
     function renderFight() {
         let fightAnimationId = window.requestAnimationFrame(renderFight);
         fightBackground.draw();
-
-
         hero1.draw();
         warrior.draw();
-
+        // document.querySelector('#ui').style.display = 'block';
+        // document.querySelector('#healthbargreen').style.width = '100%';
+        // document.querySelector('#healthbargreenE').style.display = '100%';
+        // document.querySelector('#dialogue').innerHTML = '';
         if (sceneover) {
             window.cancelAnimationFrame(fightAnimationId);
             animate();
@@ -461,6 +463,9 @@ function animate() {
                         gsap.to('#healthsectionE', {
                             opacity: 0
                         })
+                        document.querySelector('#healthbargreen').style.width = '100%';
+                        document.querySelector('#healthbargreenE').style.display = '100%';
+                        document.querySelector('#dialogue').innerHTML = '';
                         // window.cancelAnimationFrame(fightAnimationId)
                     }
                 })}, 2500)
