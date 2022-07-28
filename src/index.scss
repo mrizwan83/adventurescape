@@ -1,10 +1,12 @@
-h1 {
-  color: green;
-}
+// h1 {
+//   color: green;
+// }
 
 #overlap {
   display: inline-block;
   position: relative;
+  left: auto;
+  right: auto;
 }
 
 // div {
@@ -144,4 +146,60 @@ button {
 
 button:hover {
   background-color: lightgray;
+}
+
+#t1 {
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: lightgray 3px 3px;
+    font-size: 20px;
+    margin: 15px;
+    color: black;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    color:  black;
+}
+
+#game {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+// #bg {
+//   height: 100%;
+//   position: absolute;
+//   z-index: -1;
+// }
+
+#background {
+  background-color: rgb(96, 213, 127);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#github {
+  position: relative;
+  left: 50px;
+}
+
+#linkedin {
+  position: relative;
+  left: 100px;
 }
