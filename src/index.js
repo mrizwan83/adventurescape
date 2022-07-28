@@ -15,7 +15,8 @@ import Game from "./scripts/game";
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-
+const fw = document.querySelector('#fw')
+const b2 = document.querySelector('#b2')
 
 canvas.width = 1024;
 canvas.height = 576;
@@ -200,7 +201,6 @@ function animate() {
             y: zone.position.y
           }}
         })) {
-
           //deactivate animation loop
           window.cancelAnimationFrame(animationID);
           fight.started = true;
@@ -532,5 +532,39 @@ window.addEventListener('keyup', (e) => {
         break
     }
 });
+
+let played = false;
+
+    // function handlemusic() {
+    //     if (played && fight.started) {
+    //         fw.pause();
+    //         b2.play();
+    //     } else if (played && !fight.started) {
+    //         b2.pause();
+    //         fw.play();
+    //     }
+    // }
+    
+
+    
+    const soundbutton = document.querySelector('#playsound')
+    soundbutton.addEventListener('click', (e)=> {
+        if (!played && !fight.started) {
+        fw.play();
+        played = true;
+        } else if (!played && fight.started) {
+            b2.play();
+            played = true
+        } else if (played && fight.started) {
+            b2.pause();
+            played = false;
+        }
+        else {
+            fw.pause();
+            played = false;
+        }
+    })
+
+    
 
 });

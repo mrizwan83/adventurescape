@@ -99,7 +99,7 @@
 }
 
 #attacksection {
-  background-color: green;
+  background-color: darkgreen;
   position: absolute;
   height: 150px;
   bottom: 0;
@@ -130,7 +130,7 @@ h2 {
   border-left: 5px black solid;
 }
 
-button {
+#bodyslam {
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -138,7 +138,19 @@ button {
   font-family: "Press Start 2P", cursive;
 }
 
-button:hover {
+#poison {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 50px;
+  font-family: "Press Start 2P", cursive;
+}
+
+#poison:hover {
+  background-color: lightgray;
+}
+
+#bodyslam:hover {
   background-color: lightgray;
 }
 
@@ -170,8 +182,9 @@ p {
   align-items: center;
 }
 
-#background {
-  background-color: rgb(96, 213, 127);
+#bg {
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   right: 0;
@@ -184,10 +197,18 @@ p {
 
 #github {
   position: relative;
-  left: 50px;
+  left: 40px;
 }
 
 #linkedin {
   position: relative;
-  left: 100px;
+  left: 150px;
+}
+
+#playsound {
+  border-radius: 12px;
+}
+
+canvas {
+  border: 5px black solid;
 }

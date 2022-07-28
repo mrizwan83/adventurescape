@@ -105,7 +105,7 @@
 }
 
 #attacksection {
-  background-color: green;
+  background-color: darkgreen;
   position: absolute;
   height: 150px;
   bottom: 0;
@@ -136,7 +136,7 @@ h2 {
   border-left: 5px black solid;
 }
 
-button {
+#bodyslam {
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -144,7 +144,19 @@ button {
   font-family: 'Press Start 2P', cursive;
 }
 
-button:hover {
+#poison {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 50px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#poison:hover {
+  background-color: lightgray;
+}
+
+#bodyslam:hover {
   background-color: lightgray;
 }
 
@@ -158,6 +170,7 @@ button:hover {
     position: relative;
     justify-content: center;
     align-items: center;
+    // background-color: rgb(126, 233, 181);
 }
 
 p {
@@ -166,7 +179,7 @@ p {
     position: relative;
     justify-content: center;
     align-items: center;
-    color:  black;
+    color: black;
 }
 
 #game {
@@ -176,15 +189,12 @@ p {
   align-items: center;
 }
 
-// #bg {
-//   height: 100%;
-//   position: absolute;
-//   z-index: -1;
-// }
-
-#background {
-  background-color: rgb(96, 213, 127);
-    position: absolute;
+#bg {
+  height: 100%;
+  width: 100%;
+  // position: absolute;
+  // z-index: -1;
+  position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
@@ -194,12 +204,32 @@ p {
     z-index: -1;
 }
 
+// #background {
+//   background-color: rgb(3, 135, 39);
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     opacity: 1;
+//     pointer-events: none;
+//     z-index: -1;
+// }
+
 #github {
   position: relative;
-  left: 50px;
+  left: 40px;
 }
 
 #linkedin {
   position: relative;
-  left: 100px;
+  left: 150px;
+}
+
+#playsound {
+  border-radius: 12px;
+}
+
+canvas {
+  border: 5px black solid;
 }
