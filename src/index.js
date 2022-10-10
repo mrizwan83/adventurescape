@@ -201,7 +201,6 @@ function animate() {
           }}
         })) {
           //deactivate animation loop
-          console.log("clodding")
           window.cancelAnimationFrame(animationID);
         //   fight.started = true;
             gsap.to('#attacksection', {
@@ -379,7 +378,6 @@ function animate() {
     let sceneover = false;
 
     function renderFight() {
-        console.log("hero" + `${hero1.health}`)
         let fightAnimationId = window.requestAnimationFrame(renderFight);
         fightBackground.draw();
         hero1.draw();
@@ -390,10 +388,13 @@ function animate() {
         // document.querySelector('#dialogue').innerHTML = '';
         if (sceneover) {
             window.cancelAnimationFrame(fightAnimationId);
+            document.querySelector('#healthbargreen').style.width = '100%';
+            document.querySelector('#healthbargreenE').style.width = '100%';
             fight.started = false;
             sceneover = false;
             animate();
-
+            hero1.health = 100;
+            warrior.health = 100;
         }
 
     }
@@ -421,10 +422,10 @@ function animate() {
       
             setTimeout(()=> {
                 warrior.attack({
-                    attack: queue[Math.floor(Math.random()*2)],
+                    attack: queue[Math.floor(Math.random()*3)],
                     receiver: hero1
                 })
-            }, 1500);
+            }, 1200);
  
 
             if (hero1.health <= 0) {
@@ -454,8 +455,13 @@ function animate() {
                             opacity: 0
                         })
                         document.querySelector('#healthbargreen').style.width = '100%';
-                        document.querySelector('#healthbargreenE').style.display = '100%';
+                        document.querySelector('#healthbargreenE').style.width = '100%';
                         document.querySelector('#dialogue').innerHTML = '';
+                        gsap.to(hero1.position, {
+                            y: hero1.position.y - 20})
+                            gsap.to(hero1, {
+                                opacity: 1
+                            })
                         // window.cancelAnimationFrame(fightAnimationId)
                     }
                 })}, 2500)
@@ -494,8 +500,13 @@ function animate() {
                             opacity: 0
                         })
                         document.querySelector('#healthbargreen').style.width = '100%';
-                        document.querySelector('#healthbargreenE').style.display = '100%';
+                        document.querySelector('#healthbargreenE').style.width = '100%';
                         document.querySelector('#dialogue').innerHTML = '';
+                        gsap.to(warrior.position, {
+                            y: warrior.position.y - 20})
+                            gsap.to(warrior, {
+                                opacity: 1
+                            })
                         // window.cancelAnimationFrame(fightAnimationId)
                     }
                 })}, 2500)

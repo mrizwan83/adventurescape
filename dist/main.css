@@ -72,11 +72,15 @@
 
 #dialogue {
   font-family: "Press Start 2P", cursive;
-  display: none;
+  display: flex;
   background-color: darkgreen;
   position: relative;
   padding: 15px;
+  min-width: 300px;
+  justify-content: center;
+  align-items: center;
 }
+
 
 #ui {
   display: none;

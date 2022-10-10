@@ -30,13 +30,11 @@ export default class Fighter extends Sprite {
       case 'Poison':
         const timeline1 = gsap.timeline();
 
-        let change1 = 0;
-        if (this.isTarget) change1 = 0;
 
         timeline1.to(this.position, {
-          y: this.position.y - change1
+          y: this.position.y 
         }).to(this.position, {
-          y: this.position.y + change1 * 4,
+          y: this.position.y,
           duration: 0.1,
           onComplete: () => {
             gsap.to(healthBar, {
@@ -61,14 +59,10 @@ export default class Fighter extends Sprite {
         break
         case 'Stomp':
           const timeline2 = gsap.timeline();
-  
-          let change2 = 5;
-          if (this.isTarget) change2 = 5;
-  
           timeline2.to(this.position, {
-            y: this.position.y - change2
+            y: this.position.y - 50
           }).to(this.position, {
-            y: this.position.y + change2 * 4,
+            y: this.position.y + 40,
             duration: 0.1,
             onComplete: () => {
               gsap.to(healthBar, {
