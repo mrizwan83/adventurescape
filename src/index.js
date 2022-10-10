@@ -452,15 +452,9 @@ function animate() {
         }
 
     }
-    // ///testing
-    // renderFight();
+
     animate();
 
-    // document.querySelector('#ui').getElementsByClassName.display = none;
-    // if (sceneover) {
-    //     animate();
-    // }
-   
 
 
     const queue = [attacks.BodySlam, attacks.Poison, attacks.Stomp];
@@ -619,15 +613,6 @@ window.addEventListener('keyup', (e) => {
 
 let played = false;
 
-    // function handlemusic() {
-    //     if (played && fight.started) {
-    //         fw.pause();
-    //         b2.play();
-    //     } else if (played && !fight.started) {
-    //         b2.pause();
-    //         fw.play();
-    //     }
-    // }
     
 
     
