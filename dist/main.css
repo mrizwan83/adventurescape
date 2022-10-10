@@ -132,6 +132,7 @@ h2 {
   cursor: pointer;
   height: 50px;
   font-family: "Press Start 2P", cursive;
+  border-radius: 15px;
 }
 
 #poison {
@@ -140,14 +141,15 @@ h2 {
   cursor: pointer;
   height: 50px;
   font-family: "Press Start 2P", cursive;
+  border-radius: 15px;
 }
 
 #poison:hover {
-  background-color: lightgray;
+  background-color: rgb(9, 238, 207);
 }
 
 #bodyslam:hover {
-  background-color: lightgray;
+  background-color: rgb(9, 238, 207);
 }
 
 #t1 {
@@ -193,18 +195,30 @@ p {
 
 #github {
   position: relative;
-  left: 100px;
 }
 
 #linkedin {
   position: relative;
-  left: 220px;
+
 }
 
 #playsound {
   border-radius: 12px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+  font-weight: 400;
+}
+
+#playsound:hover {
+  cursor: pointer;
+  background-color:rgb(9, 238, 207);
 }
 
 canvas {
   border: 5px black solid;
+}
+
+img {
+  padding: 5px;
 }

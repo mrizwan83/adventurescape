@@ -5,8 +5,7 @@ import Boundary from "./scripts/boundary";
 import Zone from "./scripts/zone";
 import { attacks } from "./data/attacks";
 import Fighter from "./scripts/fighter";
-import { audio } from "./data/audio";
-import Game from "./scripts/game";
+
 
 
 
@@ -202,6 +201,7 @@ function animate() {
           }}
         })) {
           //deactivate animation loop
+          console.log("clodding")
           window.cancelAnimationFrame(animationID);
         //   fight.started = true;
             gsap.to('#attacksection', {
@@ -379,17 +379,21 @@ function animate() {
     let sceneover = false;
 
     function renderFight() {
+        console.log("hero" + `${hero1.health}`)
         let fightAnimationId = window.requestAnimationFrame(renderFight);
         fightBackground.draw();
         hero1.draw();
         warrior.draw();
-        // document.querySelector('#ui').style.display = 'block';
+        document.querySelector('#ui').style.display = 'block';
         // document.querySelector('#healthbargreen').style.width = '100%';
         // document.querySelector('#healthbargreenE').style.display = '100%';
         // document.querySelector('#dialogue').innerHTML = '';
         if (sceneover) {
             window.cancelAnimationFrame(fightAnimationId);
+            fight.started = false;
+            sceneover = false;
             animate();
+
         }
 
     }
@@ -404,7 +408,7 @@ function animate() {
    
 
 
-    const queue = [attacks.BodySlam, attacks.Poison];
+    const queue = [attacks.BodySlam, attacks.Poison, attacks.Stomp];
 
 
     document.querySelectorAll('button').forEach((button) => {
@@ -431,6 +435,31 @@ function animate() {
                 setTimeout(()=> { gsap.to(hero1, {
                     opacity: 0
                 })}, 1500)
+
+                setTimeout(()=> {gsap.to('#canvasdiv', {
+                    opacity: 1,
+                    onComplete: ()=> {
+                        sceneover = true
+                        gsap.to('#canvasdiv', {
+                            opacity: 0
+                        })
+                        fight.started = false
+                        gsap.to('#attacksection', {
+                            opacity: 0
+                        })
+                        gsap.to('#healthsection', {
+                            opacity: 0
+                        })
+                        gsap.to('#healthsectionE', {
+                            opacity: 0
+                        })
+                        document.querySelector('#healthbargreen').style.width = '100%';
+                        document.querySelector('#healthbargreenE').style.display = '100%';
+                        document.querySelector('#dialogue').innerHTML = '';
+                        // window.cancelAnimationFrame(fightAnimationId)
+                    }
+                })}, 2500)
+                
         
             }
 
