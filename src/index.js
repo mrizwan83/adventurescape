@@ -381,7 +381,7 @@ function animate() {
         },
         moving: true,
         isTarget: true,
-        name: 'Enemy'
+        name: 'Green Warrior'
     });
 
     const warrior2 = new Fighter({
@@ -449,6 +449,7 @@ function animate() {
             warrior3.health = 100;
             warrior4.health = 100;
             warriors.push(warriors.shift())
+            opponent = warriors[0]
         }
 
     }
@@ -465,7 +466,7 @@ function animate() {
             const chosenAttack = attacks[e.currentTarget.innerHTML];
             hero1.attack({
                 attack: chosenAttack,
-                receiver: warrior
+                receiver: opponent
             })
       
             setTimeout(()=> {
