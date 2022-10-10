@@ -340,6 +340,15 @@ function animate() {
     const warriorImage = new Image();
     warriorImage.src = 'wireframes\\warriortry1.png'
 
+    const warrior2Image = new Image();
+    warrior2Image.src = 'wireframes/bki.png'
+
+    const warrior3Image = new Image();
+    warrior3Image.src = 'wireframes/bodidle.png'
+
+    const warrior4Image = new Image();
+    warrior4Image.src = 'wireframes/wizardidle.png'
+
     const fightBackground = new Sprite({
         position: {
             x: 0,
@@ -372,20 +381,61 @@ function animate() {
         },
         moving: true,
         isTarget: true,
-        name: 'Green Warrior'
-    })
+        name: 'Enemy'
+    });
 
+    const warrior2 = new Fighter({
+        position: {
+            x: 480,
+            y: 278
+        },
+        image: warrior2Image,
+        frames: {
+            max: 10,
+        },
+        moving: true,
+        isTarget: true,
+        name: 'Dark Knight'
+    });
+
+    const warrior3 = new Fighter({
+        position: {
+            x: 480,
+            y: 305
+        },
+        image: warrior3Image,
+        frames: {
+            max: 8,
+        },
+        moving: true,
+        isTarget: true,
+        name: 'Bringer of Death'
+    });
+
+    const warrior4 = new Fighter({
+        position: {
+            x: 480,
+            y: 305
+        },
+        image: warrior4Image,
+        frames: {
+            max: 6,
+        },
+        moving: true,
+        isTarget: true,
+        name: 'Dark Mage'
+    });
+
+    let i = 0;
     let sceneover = false;
-
+    let warriors = [warrior, warrior2, warrior3, warrior4];
+    let opponent = warriors[0]
     function renderFight() {
         let fightAnimationId = window.requestAnimationFrame(renderFight);
         fightBackground.draw();
         hero1.draw();
-        warrior.draw();
+        warriors[0].draw();
         document.querySelector('#ui').style.display = 'block';
-        // document.querySelector('#healthbargreen').style.width = '100%';
-        // document.querySelector('#healthbargreenE').style.display = '100%';
-        // document.querySelector('#dialogue').innerHTML = '';
         if (sceneover) {
             window.cancelAnimationFrame(fightAnimationId);
             document.querySelector('#healthbargreen').style.width = '100%';
@@ -395,6 +445,10 @@ function animate() {
             animate();
             hero1.health = 100;
             warrior.health = 100;
+            warrior2.health = 100;
+            warrior3.health = 100;
+            warrior4.health = 100;
+            warriors.push(warriors.shift())
         }
 
     }
@@ -421,7 +475,7 @@ function animate() {
             })
       
             setTimeout(()=> {
-                warrior.attack({
+                warriors[0].attack({
                     attack: queue[Math.floor(Math.random()*3)],
                     receiver: hero1
                 })
@@ -462,22 +516,21 @@ function animate() {
                             gsap.to(hero1, {
                                 opacity: 1
                             })
-                        // window.cancelAnimationFrame(fightAnimationId)
                     }
                 })}, 2500)
                 
         
             }
 
-            if (warrior.health <= 0) {
-                document.getElementById("dialogue").innerHTML = `${warrior.name} lost!`;
+            else if (opponent.health <= 0) {
+                document.getElementById("dialogue").innerHTML = `${opponent.name} lost!`;
                 setTimeout(() => {
-                    gsap.to(warrior.position, {
-                        y: warrior.position.y + 20
+                    gsap.to(opponent.position, {
+                        y: opponent.position.y + 20
                     })
                 }, 1500)
                 setTimeout(() => {
-                    gsap.to(warrior, {
+                    gsap.to(opponent, {
                         opacity: 0
                     })
                 }, 1500)
@@ -502,12 +555,11 @@ function animate() {
                         document.querySelector('#healthbargreen').style.width = '100%';
                         document.querySelector('#healthbargreenE').style.width = '100%';
                         document.querySelector('#dialogue').innerHTML = '';
-                        gsap.to(warrior.position, {
-                            y: warrior.position.y - 20})
-                            gsap.to(warrior, {
+                        gsap.to(opponent.position, {
+                            y: opponent.position.y - 20})
+                            gsap.to(opponent, {
                                 opacity: 1
                             })
-                        // window.cancelAnimationFrame(fightAnimationId)
                     }
                 })}, 2500)
             }
@@ -516,16 +568,7 @@ function animate() {
 
   
 
-    // if (hero1.health <= 0) {
-    //     lose();
-    
-    // }
-
-    // if (warrior.health <= 0) {
-    //     lose();
-     
-    // }
-
+ 
 
 
 let lastKey = '';
