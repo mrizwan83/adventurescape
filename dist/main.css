@@ -1,7 +1,57 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
-#overlap {
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+  #overlap {
   display: inline-block;
   position: relative;
   left: auto;
@@ -110,7 +160,7 @@
 }
 
 h2 {
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
   font-family: "Press Start 2P", cursive;
 }
@@ -123,11 +173,12 @@ h2 {
 }
 
 #description {
-  width: 40%;
+  width: 48%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-left: 5px black solid;
+  border-right: 5px black solid;
 }
 
 #bodyslam {
@@ -160,7 +211,7 @@ h2 {
   font-family: "Press Start 2P", cursive;
   text-shadow: lightgray 3px 3px;
   font-size: 20px;
-  margin: 15px;
+  /* margin: 15px; */
   color: black;
   display: flex;
   position: relative;
@@ -175,6 +226,7 @@ p {
   justify-content: center;
   align-items: center;
   color: black;
+  padding: 10px;
 }
 
 #game {
@@ -199,11 +251,22 @@ p {
 
 #github {
   position: relative;
+  padding: 10px;
 }
 
 #linkedin {
   position: relative;
+  padding: 10px;
+}
 
+#github:hover {
+  background-color: rgb(9, 238, 207);
+  border-radius: 15px;
+}
+
+#linkedin:hover {
+  background-color: rgb(9, 238, 207);
+  border-radius: 15px;
 }
 
 #playsound {
@@ -223,6 +286,62 @@ canvas {
   border: 5px black solid;
 }
 
-img {
+
+
+#title-music {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+h1 {
+  font-size: 6vh;
+}
+
+#copyright {
+  text-align: center;
   padding: 5px;
+  font-size: 18px;
+}
+
+#game-controls {
+  border: 5px black solid;
+  width: 1024px;
+  margin-top: -8px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#link-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#choose {
+  font-size: 24px;
+  padding: 5px;
+  border-bottom: 2px solid lawngreen ;
+  margin-bottom: 5px;
+}
+
+#dialogue-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dialogue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

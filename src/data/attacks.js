@@ -1,7 +1,7 @@
 export const attacks = {
   BodySlam: {
     name: 'BodySlam',
-    damage: 15
+    damage: 20
   },
   Poison: {
     name: 'Poison',
@@ -9,6 +9,6 @@ export const attacks = {
   },
   Stomp: {
     name: 'Stomp',
-    damage: 20
+    damage: 30
   }
 }

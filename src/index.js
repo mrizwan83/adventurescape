@@ -457,110 +457,125 @@ function animate() {
     animate();
 
 
-
     const queue = [attacks.BodySlam, attacks.Poison, attacks.Stomp];
+    let chosenAttack = null;
+    let before = new Date().getTime();
+    function first(e) {
+        chosenAttack = attacks[e.currentTarget.innerHTML];
+        const curr = new Date().getTime();
+        console.log(curr)
+        console.log(before)
+        if (curr - before > 1000) {
+            if (hero1.health > 0) {
+                hero1.attack({
+                   attack: chosenAttack,
+                   receiver: opponent
+               })
+           }
+          
+          
+     
+           if (opponent.health > 0) {
+              setTimeout(()=> {
+                warriors[0].attack({
+                   attack: queue[Math.floor(Math.random()*3)],
+                   receiver: hero1
+               })
+           }, 1000);
+            setTimeout(()=> {
+                if (hero1.health <= 0) {
+                    document.getElementById("dialogue").innerHTML = `${hero1.name} lost!`;
+                    setTimeout(()=> {gsap.to(hero1.position, {
+                        y: hero1.position.y + 20
+                    })}, 1500)
+                    setTimeout(()=> { gsap.to(hero1, {
+                        opacity: 0
+                    })}, 1500)
+        
+                    setTimeout(()=> {gsap.to('#canvasdiv', {
+                        opacity: 1,
+                        onComplete: ()=> {
+                            sceneover = true
+                            gsap.to('#canvasdiv', {
+                                opacity: 0
+                            })
+                            fight.started = false
+                            gsap.to('#attacksection', {
+                                opacity: 0
+                            })
+                            gsap.to('#healthsection', {
+                                opacity: 0
+                            })
+                            gsap.to('#healthsectionE', {
+                                opacity: 0
+                            })
+                            document.querySelector('#healthbargreen').style.width = '100%';
+                            document.querySelector('#healthbargreenE').style.width = '100%';
+                            document.querySelector('#dialogue').innerHTML = '';
+                            gsap.to(hero1.position, {
+                                y: hero1.position.y - 20})
+                                gsap.to(hero1, {
+                                    opacity: 1
+                                })
+                        }
+                    })}, 2500)
+                    
+            
+                }
+           }, 1200);
+           }
+        }
+       before = curr;
+         if (opponent.health <= 0) {
+            document.getElementById("dialogue").innerHTML = `${opponent.name} lost!`;
+            setTimeout(() => {
+                gsap.to(opponent.position, {
+                    y: opponent.position.y + 20
+                })
+            }, 1500)
+            setTimeout(() => {
+                gsap.to(opponent, {
+                    opacity: 0
+                })
+            }, 1500)
+     
+            setTimeout(()=> {gsap.to('#canvasdiv', {
+                opacity: 1,
+                onComplete: ()=> {
+                    sceneover = true
+                    gsap.to('#canvasdiv', {
+                        opacity: 0
+                    })
+                    fight.started = false
+                    gsap.to('#attacksection', {
+                        opacity: 0
+                    })
+                    gsap.to('#healthsection', {
+                        opacity: 0
+                    })
+                    gsap.to('#healthsectionE', {
+                        opacity: 0
+                    })
+                    document.querySelector('#healthbargreen').style.width = '100%';
+                    document.querySelector('#healthbargreenE').style.width = '100%';
+                    document.querySelector('#dialogue').innerHTML = '';
+                    gsap.to(opponent.position, {
+                        y: opponent.position.y - 20})
+                        gsap.to(opponent, {
+                            opacity: 1
+                        })
+                }
+            })}, 2500)
+        }
+    }
 
 
     document.querySelectorAll('button').forEach((button) => {
-        button.addEventListener('click', (e) => {
-            const chosenAttack = attacks[e.currentTarget.innerHTML];
-            hero1.attack({
-                attack: chosenAttack,
-                receiver: opponent
-            })
-      
-            setTimeout(()=> {
-                warriors[0].attack({
-                    attack: queue[Math.floor(Math.random()*3)],
-                    receiver: hero1
-                })
-            }, 1200);
- 
-
-            if (hero1.health <= 0) {
-                document.getElementById("dialogue").innerHTML = `${hero1.name} lost!`;
-                setTimeout(()=> {gsap.to(hero1.position, {
-                    y: hero1.position.y + 20
-                })}, 1500)
-                setTimeout(()=> { gsap.to(hero1, {
-                    opacity: 0
-                })}, 1500)
-
-                setTimeout(()=> {gsap.to('#canvasdiv', {
-                    opacity: 1,
-                    onComplete: ()=> {
-                        sceneover = true
-                        gsap.to('#canvasdiv', {
-                            opacity: 0
-                        })
-                        fight.started = false
-                        gsap.to('#attacksection', {
-                            opacity: 0
-                        })
-                        gsap.to('#healthsection', {
-                            opacity: 0
-                        })
-                        gsap.to('#healthsectionE', {
-                            opacity: 0
-                        })
-                        document.querySelector('#healthbargreen').style.width = '100%';
-                        document.querySelector('#healthbargreenE').style.width = '100%';
-                        document.querySelector('#dialogue').innerHTML = '';
-                        gsap.to(hero1.position, {
-                            y: hero1.position.y - 20})
-                            gsap.to(hero1, {
-                                opacity: 1
-                            })
-                    }
-                })}, 2500)
-                
-        
-            }
-
-            else if (opponent.health <= 0) {
-                document.getElementById("dialogue").innerHTML = `${opponent.name} lost!`;
-                setTimeout(() => {
-                    gsap.to(opponent.position, {
-                        y: opponent.position.y + 20
-                    })
-                }, 1500)
-                setTimeout(() => {
-                    gsap.to(opponent, {
-                        opacity: 0
-                    })
-                }, 1500)
-         
-                setTimeout(()=> {gsap.to('#canvasdiv', {
-                    opacity: 1,
-                    onComplete: ()=> {
-                        sceneover = true
-                        gsap.to('#canvasdiv', {
-                            opacity: 0
-                        })
-                        fight.started = false
-                        gsap.to('#attacksection', {
-                            opacity: 0
-                        })
-                        gsap.to('#healthsection', {
-                            opacity: 0
-                        })
-                        gsap.to('#healthsectionE', {
-                            opacity: 0
-                        })
-                        document.querySelector('#healthbargreen').style.width = '100%';
-                        document.querySelector('#healthbargreenE').style.width = '100%';
-                        document.querySelector('#dialogue').innerHTML = '';
-                        gsap.to(opponent.position, {
-                            y: opponent.position.y - 20})
-                            gsap.to(opponent, {
-                                opacity: 1
-                            })
-                    }
-                })}, 2500)
-            }
-        })
+            button.addEventListener('click', first)
     })
 
+
+   
   
 
  
