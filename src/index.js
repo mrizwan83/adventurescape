@@ -463,9 +463,7 @@ function animate() {
     function first(e) {
         chosenAttack = attacks[e.currentTarget.innerHTML];
         const curr = new Date().getTime();
-        console.log(curr)
-        console.log(before)
-        if (curr - before > 1000) {
+        if (curr - before > 1500) {
             if (hero1.health > 0) {
                 hero1.attack({
                    attack: chosenAttack,
