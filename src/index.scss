@@ -1,18 +1,54 @@
-// h1 {
-//   color: green;
-// }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
-#overlap {
+
+  #overlap {
   display: inline-block;
   position: relative;
   left: auto;
   right: auto;
 }
-
-// div {
-//   display: inline-block;
-//   position: relative;
-// }
 
 #healthsection {
   background-color: rgb(61, 96, 8);
@@ -77,16 +113,16 @@
 }
 
 #dialogue {
-  font-family: 'Press Start 2P', cursive;
-  display: none;
+  font-family: "Press Start 2P", cursive;
+  display: flex;
   background-color: darkgreen;
   position: relative;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
   padding: 15px;
+  min-width: 300px;
+  justify-content: center;
+  align-items: center;
 }
+
 
 #ui {
   display: none;
@@ -116,9 +152,9 @@
 }
 
 h2 {
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
 }
 
 #attacks {
@@ -129,11 +165,12 @@ h2 {
 }
 
 #description {
-  width: 40%;
+  width: 48%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-left: 5px black solid;
+  border-right: 5px black solid;
 }
 
 #bodyslam {
@@ -141,7 +178,8 @@ h2 {
   border: 0;
   cursor: pointer;
   height: 50px;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
+  border-radius: 15px;
 }
 
 #poison {
@@ -149,37 +187,38 @@ h2 {
   border: 0;
   cursor: pointer;
   height: 50px;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
+  border-radius: 15px;
 }
 
 #poison:hover {
-  background-color: lightgray;
+  background-color: rgb(9, 238, 207);
 }
 
 #bodyslam:hover {
-  background-color: lightgray;
+  background-color: rgb(9, 238, 207);
 }
 
 #t1 {
-    font-family: 'Press Start 2P', cursive;
-    text-shadow: lightgray 3px 3px;
-    font-size: 20px;
-    margin: 15px;
-    color: black;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    // background-color: rgb(126, 233, 181);
+  font-family: "Press Start 2P", cursive;
+  text-shadow: lightgray 3px 3px;
+  font-size: 20px;
+  /* margin: 15px; */
+  color: black;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 p {
-    font-family: 'Press Start 2P', cursive;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    color: black;
+  font-family: "Press Start 2P", cursive;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  padding: 10px;
 }
 
 #game {
@@ -192,44 +231,109 @@ p {
 #bg {
   height: 100%;
   width: 100%;
-  // position: absolute;
-  // z-index: -1;
   position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 1;
-    pointer-events: none;
-    z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  pointer-events: none;
+  z-index: -1;
 }
-
-// #background {
-//   background-color: rgb(3, 135, 39);
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-//     bottom: 0;
-//     left: 0;
-//     opacity: 1;
-//     pointer-events: none;
-//     z-index: -1;
-// }
 
 #github {
   position: relative;
-  left: 100px;
+  padding: 10px;
 }
 
 #linkedin {
   position: relative;
-  left: 220px;
+  padding: 10px;
+}
+
+#github:hover {
+  background-color: rgb(9, 238, 207);
+  border-radius: 15px;
+}
+
+#linkedin:hover {
+  background-color: rgb(9, 238, 207);
+  border-radius: 15px;
 }
 
 #playsound {
   border-radius: 12px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+  font-weight: 400;
+}
+
+#playsound:hover {
+  cursor: pointer;
+  background-color:rgb(9, 238, 207);
 }
 
 canvas {
   border: 5px black solid;
+}
+
+
+
+#title-music {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+h1 {
+  font-size: 6vh;
+}
+
+#copyright {
+  text-align: center;
+  padding: 5px;
+  font-size: 18px;
+}
+
+#game-controls {
+  border: 5px black solid;
+  width: 1024px;
+  margin-top: -8px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#link-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#choose {
+  font-size: 24px;
+  padding: 5px;
+  border-bottom: 2px solid lawngreen ;
+  margin-bottom: 5px;
+}
+
+#dialogue-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dialogue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
