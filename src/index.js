@@ -22,7 +22,14 @@ canvas.height = 576;
 
 
 window.addEventListener('DOMContentLoaded', (event) => {
+
+let welcome = document.getElementById('welcome-screen')
+welcome.addEventListener('click', () => {
+    document.querySelector('#welcome-screen').style.display = 'none';
+    document.querySelector('#ingame').style.display = 'block';
+})
     
+
 
 
 // all the tiles where we can activate a fight/battle

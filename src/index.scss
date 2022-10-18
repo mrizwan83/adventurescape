@@ -289,7 +289,9 @@ canvas {
 }
 
 h1 {
-  font-size: 6vh;
+  font-size: 60px;
+  font-family: "Press Start 2P", cursive;
+  padding: 15px;
 }
 
 #copyright {
@@ -321,7 +323,7 @@ body {
 #choose {
   font-size: 24px;
   padding: 5px;
-  border-bottom: 2px solid lawngreen ;
+  // border-bottom: 2px solid lawngreen ;
   margin-bottom: 5px;
 }
 
@@ -336,4 +338,43 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#ingame {
+  display: none;
+}
+
+#welcome-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+#title-welcome {
+  font-size: 60px;
+  font-family: "Press Start 2P", cursive;
+  padding: 15px;
+}
+
+#continue {
+  color: rgb(9, 238, 207);
+  margin: 30px;
+  background-color: darkgreen;
+}
+
+#continue:hover {
+  cursor: pointer;
+}
+
+#gcrime {
+  height: 300px;
+  border-radius: 100px;
+  margin-top: 10px;
+}
+
+#gcrime:hover {
+  cursor: pointer;
+  border: 3px solid rgb(9, 238, 207);
 }
