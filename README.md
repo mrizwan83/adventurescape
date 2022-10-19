@@ -28,7 +28,7 @@ In addition, this project will include:
 ![Hot Nets Home Page](wireframes/wireframes.png)
 
 -{ Nav links include links to this project's Github repo, my LinkedIn and the About info}
--{ Controls will include Start, Pause Game and will have game instructions}
+-{ Controls will have game instructions}
 -{ Game instructions will be like 'a' to move left, 'd' to move right; etc.}
 
 # Technologies, Libraries, APIs:
