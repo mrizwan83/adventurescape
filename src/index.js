@@ -207,9 +207,7 @@ function animate() {
         })
         
     }
-    // if (killcount < 0) {
-    //     console.log("You Lost!")
-    // }
+    
   
     if (fight.started) return
     else {
@@ -523,7 +521,7 @@ function animate() {
                     setTimeout(()=> { gsap.to(hero1, {
                         opacity: 0
                     })}, 1500)
-                    console.log(killcount)
+                    
         
                     setTimeout(()=> {gsap.to('#canvasdiv', {
                         opacity: 1,
@@ -573,7 +571,7 @@ function animate() {
                     opacity: 0
                 })
             }, 1500)
-            console.log(killcount)
+           
             setTimeout(()=> {gsap.to('#canvasdiv', {
                 opacity: 1,
                 onComplete: ()=> {
