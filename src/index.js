@@ -167,6 +167,7 @@ const fight = {
 }
 
 function animate() {
+    document.querySelector("#killcount").style.display = 'flex';
     const animationID = window.requestAnimationFrame(animate);
     document.querySelector('#ui').style.display = 'none';
     background.draw();
@@ -195,6 +196,21 @@ function animate() {
     let moving = true;
     hero.moving = false;
     //lets try battlezone activation
+    if (killcount > 3) {
+        window.cancelAnimationFrame(animationID);
+        document.querySelector('#winner').style.display = 'flex';
+        document.querySelector('#restart').addEventListener('click', () => {
+            killcount = 0;
+            document.getElementById("kc").innerHTML = killcount;
+            document.querySelector('#winner').style.display = 'none';
+            animate();
+        })
+        
+    }
+    // if (killcount < 0) {
+    //     console.log("You Lost!")
+    // }
+  
     if (fight.started) return
     else {
      if (keys.c.pressed && lastKey === 'c') {
@@ -433,11 +449,13 @@ function animate() {
         name: 'Dark Mage'
     });
 
+    let killcount = 0;
     let i = 0;
     let sceneover = false;
     let warriors = [warrior, warrior2, warrior3, warrior4];
     let opponent = warriors[0]
     function renderFight() {
+        document.querySelector("#killcount").style.display = 'none'
         let fightAnimationId = window.requestAnimationFrame(renderFight);
         fightBackground.draw();
         hero1.draw();
@@ -467,10 +485,17 @@ function animate() {
     const queue = [attacks.BodySlam, attacks.Poison, attacks.Stomp];
     let chosenAttack = null;
     let before = new Date().getTime();
+
+
+   
+
+
+
+
     function first(e) {
         chosenAttack = attacks[e.currentTarget.innerHTML];
         const curr = new Date().getTime();
-        if (curr - before > 1500) {
+        if (curr - before > 1700) {
             if (hero1.health > 0) {
                 hero1.attack({
                    attack: chosenAttack,
@@ -490,12 +515,15 @@ function animate() {
             setTimeout(()=> {
                 if (hero1.health <= 0) {
                     document.getElementById("dialogue").innerHTML = `${hero1.name} lost!`;
+                    killcount -= 1;
+                    document.getElementById("kc").innerHTML = killcount;
                     setTimeout(()=> {gsap.to(hero1.position, {
                         y: hero1.position.y + 20
                     })}, 1500)
                     setTimeout(()=> { gsap.to(hero1, {
                         opacity: 0
                     })}, 1500)
+                    console.log(killcount)
         
                     setTimeout(()=> {gsap.to('#canvasdiv', {
                         opacity: 1,
@@ -533,6 +561,8 @@ function animate() {
        before = curr;
          if (opponent.health <= 0) {
             document.getElementById("dialogue").innerHTML = `${opponent.name} lost!`;
+            killcount += 1;
+            document.getElementById("kc").innerHTML = killcount;
             setTimeout(() => {
                 gsap.to(opponent.position, {
                     y: opponent.position.y + 20
@@ -543,7 +573,7 @@ function animate() {
                     opacity: 0
                 })
             }, 1500)
-     
+            console.log(killcount)
             setTimeout(()=> {gsap.to('#canvasdiv', {
                 opacity: 1,
                 onComplete: ()=> {
@@ -580,7 +610,7 @@ function animate() {
     })
 
 
-   
+    
   
 
  
@@ -633,24 +663,22 @@ window.addEventListener('keyup', (e) => {
 });
 
 let played = false;
-
+let b2played = false
     
 
     
     const soundbutton = document.querySelector('#playsound')
     soundbutton.addEventListener('click', (e)=> {
-        if (!played && !fight.started) {
+        if ((played === false) && (fight.started === false)) {
         fw.play();
         played = true;
-        } else if (!played && fight.started) {
+        } else if ((played === false) && (fight.started === true)) {
             b2.play();
             played = true
-        } else if (played && fight.started) {
-            b2.pause();
-            played = false;
-        }
+        } 
         else {
             fw.pause();
+            b2.pause();
             played = false;
         }
     })

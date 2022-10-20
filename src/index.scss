@@ -378,3 +378,51 @@ body {
   cursor: pointer;
   border: 3px solid rgb(9, 238, 207);
 }
+
+#winner {
+  display: none;
+  font-family: "Press Start 2P", cursive;
+  background-color: rgb(0, 255, 140);
+  padding: 50px;
+  width: 800px;
+  border-radius: 15px;
+  margin-left: 60px;
+  margin-top: 80px;
+  opacity: 0.8;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  border: 3px solid green;
+  flex-direction: column;
+}
+
+#restart {
+  padding: 10px;
+}
+
+#restart:hover {
+  cursor: pointer;
+  background-color: orange;
+}
+
+#winner-container {
+  position: absolute;
+}
+
+#killcount {
+  display: flex;
+  font-family: "Press Start 2P", cursive;
+  background-color: rgba(0, 178, 255, 0.7);
+  padding: 15px 25px;
+  width: 80px;
+  margin-left: 896px;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 3px solid black;
+  border-left: 3px solid black;
+  flex-direction: column;
+  margin-top: 4px;
+}
