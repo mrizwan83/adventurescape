@@ -228,9 +228,13 @@ p {
   align-items: center;
 }
 
+
 #bg {
-  height: 100%;
   width: 100%;
+  height: 100%;
+  min-height: 900px;
+  overflow: hidden;
+  object-fit: fill;
   position: absolute;
   top: 0;
   right: 0;
@@ -279,7 +283,6 @@ canvas {
 }
 
 
-
 #title-music {
     display: flex;
     flex-direction: column;
@@ -323,7 +326,6 @@ body {
 #choose {
   font-size: 24px;
   padding: 5px;
-  // border-bottom: 2px solid lawngreen ;
   margin-bottom: 5px;
 }
 
@@ -345,6 +347,7 @@ body {
 }
 
 #welcome-screen {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -353,15 +356,32 @@ body {
 }
 
 #title-welcome {
+  margin-top: 1%;
   font-size: 60px;
   font-family: "Press Start 2P", cursive;
   padding: 15px;
+  background-color: #022f2c;
+  border-radius: 15px;
+  color: #ffb800;
+}
+
+#game-description {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #022f2c;
+  margin-top: 20px;
 }
 
 #continue {
-  color: rgb(9, 238, 207);
+  color: #ffb800;
   margin: 30px;
-  background-color: darkgreen;
+  background-color: #022f2c;
+  border-radius: 15px;
 }
 
 #continue:hover {
@@ -374,10 +394,6 @@ body {
   margin-top: 10px;
 }
 
-#gcrime:hover {
-  cursor: pointer;
-  border: 3px solid rgb(9, 238, 207);
-}
 
 #winner {
   display: none;
@@ -426,4 +442,8 @@ body {
   border-left: 3px solid black;
   flex-direction: column;
   margin-top: 4px;
+}
+
+#gd-inside{
+  color: #ffb800;
 }
